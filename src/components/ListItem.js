@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { 
+    Text, 
+    TouchableWithoutFeedback, 
+    View,
+    LayoutAnimation
+} from 'react-native';
 import { CardSection } from './common';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { UIManager } from 'react-native'
 
 class ListItem extends Component {
+    componentDidUpdate() {
+        UIManager.setLayoutAnimationEnabledExperimental(true);
+        LayoutAnimation.spring();
+    }
+
     renderDescription() {
         const { library, expanded } = this.props;
 
         if (expanded) {
             return (
-                <Text style={{ fontSize: 18 }}>
-                    {library.item.description}
-                </Text>
+                <CardSection>
+                    <Text style={{ fontSize: 18, flex: 1 }}>
+                        {library.item.description}
+                    </Text>
+                </CardSection>
             );
         }
     }
